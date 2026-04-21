@@ -106,40 +106,41 @@ const renderAlbumGrid = (albums = []) => (
 
             {selectedAlbum && (
                 <div style={{
-                    position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
+                    position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh', // 100dvh arregla el bug de Safari
                     backgroundColor: 'rgba(0, 0, 0, 0.85)',
                     display: 'flex', justifyContent: 'center', alignItems: 'center',
-                    zIndex: 1000 
+                    zIndex: 9999 // Z-index súper alto para que nada lo tape
                 }} onClick={() => setSelectedAlbum(null)}> 
                     
                     <div style={{
-                        backgroundColor: '#181818', padding: '30px', borderRadius: '15px',
-                        maxWidth: '500px', width: '90%', maxHeight: '80vh', overflowY: 'auto',
-                        boxShadow: '0px 0px 20px #b388ff', position: 'relative'
+                        backgroundColor: '#181818', padding: '20px', borderRadius: '15px',
+                        maxWidth: '500px', width: '90%', maxHeight: '85vh', overflowY: 'auto',
+                        boxShadow: '0px 0px 20px #b388ff', display: 'flex', flexDirection: 'column'
                     }} onClick={(e) => e.stopPropagation()}> 
                         
-                        <button 
-                            onClick={() => setSelectedAlbum(null)}
-                            style={{
-                                position: 'absolute', top: '15px', right: '15px',
-                                background: 'transparent', border: 'none', color: '#fff',
-                                fontSize: '1.5rem', cursor: 'pointer'
-                            }}
-                        >
-                            ✖
-                        </button>
-
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '20px' }}>
-                            <img src={selectedAlbum.images[0]?.url} alt="Portada" style={{ width: '100px', borderRadius: '10px' }} />
-                            <div>
-                                <h3 style={{ color: '#b388ff', margin: '0 0 5px 0' }}>{selectedAlbum.name}</h3>
-                                <p style={{ color: '#888', margin: 0 }}>Lanzamiento: {selectedAlbum.release_date}</p>
+                        {/* Cabecera del modal: Portada, Título y la 'X' juntas */}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid #333', paddingBottom: '15px', marginBottom: '15px' }}>
+                             <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                                <img src={selectedAlbum.images[0]?.url} alt="Portada" style={{ width: '80px', borderRadius: '8px' }} />
+                                <div>
+                                    <h3 style={{ color: '#b388ff', margin: '0 0 5px 0', fontSize: '1.2rem' }}>{selectedAlbum.name}</h3>
+                                    <p style={{ color: '#888', margin: 0, fontSize: '0.9rem' }}>Lanzamiento: {selectedAlbum.release_date.split('-')[0]}</p>
+                                </div>
                             </div>
+                            <button 
+                                onClick={() => setSelectedAlbum(null)}
+                                style={{
+                                    background: 'transparent', border: 'none', color: '#fff',
+                                    fontSize: '1.8rem', cursor: 'pointer', padding: '0 5px'
+                                }}
+                            >
+                                ✖
+                            </button>
                         </div>
 
-                        <h4 style={{ color: 'white', borderBottom: '1px solid #333', paddingBottom: '10px' }}>Lista de Canciones:</h4>
+                        <h4 style={{ color: 'white', margin: '0 0 10px 0' }}>Lista de Canciones:</h4>
                         
-                        <ul style={{ listStyleType: 'decimal', paddingLeft: '20px', color: '#ddd', lineHeight: '1.8' }}>
+                        <ul style={{ listStyleType: 'decimal', paddingLeft: '20px', color: '#ddd', lineHeight: '1.8', margin: 0 }}>
                             {selectedAlbum.tracks ? (
                                 selectedAlbum.tracks.map((track, index) => (
                                     <li key={index}>{track}</li>
@@ -148,6 +149,18 @@ const renderAlbumGrid = (albums = []) => (
                                 <li>Lista de canciones no disponible.</li>
                             )}
                         </ul>
+
+                        {/* Botón extra gigante para salir cómodamente desde el móvil */}
+                        <button
+                            onClick={() => setSelectedAlbum(null)}
+                            style={{
+                                marginTop: '20px', padding: '12px', backgroundColor: '#b388ff',
+                                color: '#181818', border: 'none', borderRadius: '8px', fontWeight: 'bold',
+                                fontSize: '1rem', cursor: 'pointer', width: '100%'
+                            }}
+                        >
+                            Cerrar Álbum
+                        </button>
 
                     </div>
                 </div>
