@@ -5,6 +5,7 @@ body {
   color: #fff;
   transition: all 0.5s ease;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .hero-title {
@@ -146,32 +147,51 @@ div[style*="backgroundColor: rgb(36, 36, 36)"] {
     font-size: 1rem !important;
   }
 
+  .home-content {
+    padding: 15px 10px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
   .hero-title {
     font-size: 1.8rem !important;
     line-height: 1.2 !important;
+    word-wrap: break-word !important;
   }
 
   .home-content p {
     font-size: 1rem !important;
-    padding: 0 10px !important;
+    padding: 0 5px !important;
+    margin-bottom: 20px !important;
   }
 
-  .home-content > div {
+  .home-content > div:last-of-type {
     display: flex !important;
     flex-direction: column !important;
     gap: 20px !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
-  .home-content > div > div {
+  .home-content > div:last-of-type > div {
+    min-width: 0 !important;
     width: 100% !important;
-    min-width: 100% !important;
+    padding: 20px 10px !important;
     margin: 0 !important;
     box-sizing: border-box !important;
   }
 
+  .home-content span[style*="2rem"] {
+    font-size: 1.3rem !important;
+    padding: 10px !important;
+    min-width: 40px !important;
+  }
+
   iframe {
-    height: 80px !important;
+    height: 152px !important;
     border-radius: 12px !important;
+    width: 100% !important;
   }
 
   div[style*="grid-template-columns"] {
